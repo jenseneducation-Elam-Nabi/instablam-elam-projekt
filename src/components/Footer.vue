@@ -6,11 +6,15 @@
     <button class="bell" v-else title="Sätt på notisar" @click="toggleNotification">
       <i class="far fa-bell"></i>
     </button>
+    <!-- Change background color switch -->
+    <i class="fas fa-toggle-off" v-if="!isToggled" @click="toggleBackground"></i>
+    <i class="fas fa-toggle-on" v-else @click="toggleBackground"></i>
     <p>Copyright &copy;2020 | Created by Elam Nabi</p>
   </footer>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "footerComponent",
   data() {
@@ -18,9 +22,13 @@ export default {
       isActive: false
     };
   },
+  computed: { ...mapState(["isToggled"]) },
   methods: {
     toggleNotification() {
       this.isActive = !this.isActive;
+    },
+    toggleBackground() {
+      this.$store.commit("TOGGLE_BG_COLOR");
     }
   }
 };

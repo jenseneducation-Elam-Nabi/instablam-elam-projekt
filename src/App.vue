@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{ 'set-dark-mode' :  isToggled }">
     <Header />
     <router-view />
     <Footer />
@@ -9,12 +9,14 @@
 <script>
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
+import { mapState } from "vuex";
 export default {
   name: "app",
   components: {
     Header,
     Footer
-  }
+  },
+  computed: { ...mapState(["isToggled"]) }
 };
 </script>
 
@@ -42,5 +44,9 @@ input,
   display: flex;
   flex-flow: column;
   justify-content: space-between;
+
+  &.set-dark-mode {
+    background-color: rgb(145, 159, 160);
+  }
 }
 </style>
